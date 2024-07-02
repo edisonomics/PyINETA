@@ -1,0 +1,30 @@
+[project]
+name = "pyineta"
+description = "pyINETA is a Python package for analyzing INADEQUATE NMR spectra."
+dependencies = [
+	"spatial",
+	"pynmrstar",
+	"networkx==2.3",
+	"numpy==1.17.2",
+	"pandas==1.0",
+	"nmrglue===0.7",
+	"matplotlib==3.1",
+]
+requires-python= ">= 3.7"
+readme = "README.md"
+authors = [
+    {name = "Rahil  Taujale"},
+    {email = "rtaujale@uga.edu"}
+]
+dynamic = ["license","version"] 
+
+[project.scripts]
+pyineta = "scripts.run_pyineta:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = {attr = "pyineta.__version__"}
+

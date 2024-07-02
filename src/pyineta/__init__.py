@@ -12,8 +12,6 @@ import sys
 sys.dont_write_bytecode = True
 import numpy as np
 np.set_printoptions(suppress=True)
-Dependencies (update as i go along?):
-sudo python3 -m pip install numpy pandas scipy bokeh panel pillow
 """ % __version__)
 
 

@@ -19,7 +19,21 @@ import pyineta.picking as picking
 import pyineta.overlays as overlays
 
 
-def main(args):
+def main():
+	parser = argparse.ArgumentParser(description="Script to run the INETA pipeline.")
+	parser.add_argument('-c', '--configfile', required=True,
+		help='Required: A config file with all the options and parameters required for the INETA run.')
+	parser.add_argument('-o', '--outdir', default=os.getcwd(),
+		help='Optional: Full path to the output folder.(Default: Current folder)')
+	parser.add_argument('-s', '--steps', default="all",
+		help='Optional: Specify which steps you want to run. Can be one of {all,load,pick,cluster,find,match,plot,summary,singleplot,load+,pick+,cluster+,find+,match+}. Adding a + to the end of option runs all steps after the specified step.')
+	parser.add_argument('-n', '--net', default=None,
+		help='Required with -s singlePlot: Specify which Network you want to plot.')
+	parser.add_argument('-d', '--dbname', default=None,
+		help='Required with -s singlePlot: Specify which database metabolite you want to plot.')
+	parser.add_argument('-f', '--figure', default="yes",
+		help='Optional: Generate figures- yes or no. Default: Yes')
+	args = parser.parse_args()
 
 	## Read configuration file
 
@@ -274,19 +288,4 @@ def main(args):
 		plotting.plotIndividualMatch(spec,inetaDb,args.net,args.dbname,Xrng,Yrng)#"bmse000794")
 
 if __name__ == '__main__':
-
-	parser = argparse.ArgumentParser(description="Script to run the INETA pipeline.")
-	parser.add_argument('-c', '--configfile', required=True,
-		help='Required: A config file with all the options and parameters required for the INETA run.')
-	parser.add_argument('-o', '--outdir', default=os.getcwd(),
-		help='Optional: Full path to the output folder.(Default: Current folder)')
-	parser.add_argument('-s', '--steps', default="all",
-		help='Optional: Specify which steps you want to run. Can be one of {all,load,pick,cluster,find,match,plot,summary,singleplot,load+,pick+,cluster+,find+,match+}. Adding a + to the end of option runs all steps after the specified step.')
-	parser.add_argument('-n', '--net', default=None,
-		help='Required with -s singlePlot: Specify which Network you want to plot.')
-	parser.add_argument('-d', '--dbname', default=None,
-		help='Required with -s singlePlot: Specify which database metabolite you want to plot.')
-	parser.add_argument('-f', '--figure', default="yes",
-		help='Optional: Generate figures- yes or no. Default: Yes')
-	args = parser.parse_args()
-	main(args)
+	main()
