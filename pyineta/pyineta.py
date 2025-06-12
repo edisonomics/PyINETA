@@ -297,7 +297,7 @@ def readConfig (configFile):
 
 	import configparser
 	config = configparser.ConfigParser()
-	config.read("config.ini")
+	config.read(configFile)
 	param=dict()
 	try:
 		param["Ft_File"]= config.get("PeakPick", "Ft_File")
